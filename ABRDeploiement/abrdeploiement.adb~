@@ -3,7 +3,7 @@ use TEXT_IO;
 with abrdeploiement;
 use abrdeploiement;
 
-package abrdeploiement body is
+package abrdeploiement is
 
 procedure zig(a:in out abr_t) is
 a1:abr_t;
@@ -72,7 +72,7 @@ begin
 	a:=a2;
 end zagzag;
 
-procedure zigzig(a:in out abr_t) is
+procedure zigzig(a:in out abr_t);
 a1,a2:abr_t;
 begin
 	a1:=a.all.g;
@@ -83,7 +83,7 @@ begin
 	a2.all.d:=a1;
 	--etape du zig2
 	a.all.g:=a1;
-	a2.all.d:=a;
+	a2.all.d:=a:;
 	--renommage
 	a:=a2;
 end zigzig;
@@ -114,7 +114,7 @@ begin
 			end if;
 		else
 			a1:=a.all.g;
-			if a1=null then
+			if a1:=null then
 				a1.all.val:=v;
 				zig(a);
 			else
@@ -132,7 +132,7 @@ begin
 	end if;
 end insertion;
 
-procedure recherche(a:in out abr_t,v:in integer;bool:in out boolean) is
+procedure recherche(a:in out abr_t,v:in integer;bool:in out boolean);
 a1,a2:abr_t;
 begin
 	if a=null then
