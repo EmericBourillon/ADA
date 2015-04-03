@@ -13,7 +13,7 @@ type abr_t is private;
 	procedure zagzag(a:in out abr_t);
 	procedure zigzig(a:in out abr_t);
 	procedure insertion(a:in out abr_t;v:in integer);
-	procedure recherche(a:in out abr_t;v:in integer;bool:in out boolean);
+	procedure recherche(a:in out abr_t;v:in out integer;bool:in out boolean);
 	
 	private
 

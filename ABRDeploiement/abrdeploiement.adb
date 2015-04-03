@@ -3,7 +3,7 @@ use TEXT_IO;
 with abrdeploiement;
 use abrdeploiement;
 
-package abrdeploiement body is
+package body abrdeploiement is
 
 procedure zig(a:in out abr_t) is
 a1:abr_t;
@@ -92,14 +92,12 @@ procedure insertion(a:in out abr_t;v:in integer) is
 a1,a2:abr_t;
 begin
 	if a=null then
-		a.all.val:=v;
-		a.all.g:=null;
-		a.all.d:=null;
+		a:=new noeud'(val=>v,g=>null,d=>null);
 	else
 		if v>a.all.val then
 			a1:=a.all.d;
 			if a1=null then 
-				a1.all.val:=v;
+				a1:=new noeud'(val=>v,g=>null,d=>null);
 				zag(a);
 			else
 				if v>a1.all.val then
@@ -115,7 +113,7 @@ begin
 		else
 			a1:=a.all.g;
 			if a1=null then
-				a1.all.val:=v;
+				a1:=new noeud'(val=>v,g=>null,d=>null);
 				zig(a);
 			else
 				if v>a1.all.val then
@@ -132,7 +130,7 @@ begin
 	end if;
 end insertion;
 
-procedure recherche(a:in out abr_t,v:in integer;bool:in out boolean) is
+procedure recherche(a:in out abr_t; v:in integer;bool:in out boolean) is
 a1,a2:abr_t;
 begin
 	if a=null then
@@ -150,11 +148,11 @@ begin
 					else
 						if a1.all.val<v then
 							a2:=a1.all.d;
-							recherche(a2,v);
+							recherche(a2,v,bool);
 							zagzag(a);
 						else
 							a2:=a1.all.g;
-							recherche(a2);
+							recherche(a2,v,bool);
 							zagzig(a);
 						end if;
 					end if;
@@ -168,11 +166,11 @@ begin
 					else
 						if a1.all.val>v then
 							a2:=a1.all.g;
-							recherche(a2);
+							recherche(a2,v,bool);
 							zigzig(a);
 						else
 							a2:=a1.all.d;
-							recherche(a2);
+							recherche(a2,v,bool);
 							zigzag(a);
 						end if;
 					end if;

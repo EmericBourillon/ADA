@@ -3,7 +3,7 @@ use TEXT_IO;
 with abrdeploiement;
 use abrdeploiement;
 
-package abrdeploiement is
+package body abrdeploiement is
 
 procedure zig(a:in out abr_t) is
 a1:abr_t;
@@ -72,7 +72,7 @@ begin
 	a:=a2;
 end zagzag;
 
-procedure zigzig(a:in out abr_t);
+procedure zigzig(a:in out abr_t) is
 a1,a2:abr_t;
 begin
 	a1:=a.all.g;
@@ -83,7 +83,7 @@ begin
 	a2.all.d:=a1;
 	--etape du zig2
 	a.all.g:=a1;
-	a2.all.d:=a:;
+	a2.all.d:=a;
 	--renommage
 	a:=a2;
 end zigzig;
@@ -92,14 +92,12 @@ procedure insertion(a:in out abr_t;v:in integer) is
 a1,a2:abr_t;
 begin
 	if a=null then
-		a.all.val:=v;
-		a.all.g:=null;
-		a.all.d:=null;
+		a:=new noeud'(val=>v,g=>null,d=>null);
 	else
 		if v>a.all.val then
 			a1:=a.all.d;
 			if a1=null then 
-				a1.all.val:=v;
+				a1:=new noeud'(val=>v,g=>null,d=>null);
 				zag(a);
 			else
 				if v>a1.all.val then
@@ -114,8 +112,8 @@ begin
 			end if;
 		else
 			a1:=a.all.g;
-			if a1:=null then
-				a1.all.val:=v;
+			if a1=null then
+				a1:=new noeud'(val=>v,g=>null,d=>null);
 				zig(a);
 			else
 				if v>a1.all.val then
@@ -132,7 +130,7 @@ begin
 	end if;
 end insertion;
 
-procedure recherche(a:in out abr_t,v:in integer;bool:in out boolean);
+procedure recherche(a:in out abr_t; v:in integer;bool:in out boolean) is
 a1,a2:abr_t;
 begin
 	if a=null then
